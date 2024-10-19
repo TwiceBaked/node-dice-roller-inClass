@@ -4,28 +4,17 @@ app = express()
 const cors = require("cors")
 
 var url = require('url');
-var dt = require('./date-time');
 
 const port = process.env.PORT || 3000
-const majorVersion = 1
-const minorVersion = 3
 
 // Use Express to publish static HTML, CSS, and JavaScript files that run in the browser. 
 app.use(express.static(__dirname + '/static'))
 app.use(cors({ origin: '*' }))
 
-// The app.get functions below are being processed in Node.js running on the server.
-// Implement a custom About page.
 app.get('/about', (request, response) => {
 	console.log('Calling "/about" on the Node.js server.')
 	response.type('text/plain')
-	response.send('About Node.js on Azure Template.')
-})
-
-app.get('/version', (request, response) => {
-	console.log('Calling "/version" on the Node.js server.')
-	response.type('text/plain')
-	response.send('Version: '+majorVersion+'.'+minorVersion)
+	response.send('This website is the proof of concept for a Node.js server the a Dice Roller')
 })
 
 app.get('/api/ping', (request, response) => {
@@ -37,11 +26,10 @@ app.get('/api/ping', (request, response) => {
 // Return a random number
 app.get('/rollD6', (request, response) => {
 	console.log('Calling "/rollD6" on the Node.js server.')
-	response.type('text/plain')
-	response.send((Math.floor(Math.random() * 6) + 1).toString())
+	const imagePath = `${(Math.floor(Math.random() * 6) + 1).toString()}-Di.png`;
+	response.type('image/png')
+	res.sendFile(imagePath)
 })
-
-
 
 // Custom 404 page.
 app.use((request, response) => {
