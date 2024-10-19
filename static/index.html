@@ -28,7 +28,7 @@
 			rollCounter++
 			const response = await fetch("/rollD6")
 			const responseText = await response.text()
-			document.getElementById("fetch-rollD6-result").value = responseText
+			document.getElementById("fetch-rollD6-result").innerHTML = responseText
 		}
 
 	</script>
