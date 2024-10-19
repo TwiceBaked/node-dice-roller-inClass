@@ -26,9 +26,8 @@ app.get('/api/ping', (request, response) => {
 // Return a random number
 app.get('/rollD6', (request, response) => {
 	console.log('Calling "/rollD6" on the Node.js server.')
-	const imagePath = `${(Math.floor(Math.random() * 6) + 1).toString()}-Di.png`;
-	response.type('image/png')
-	res.sendFile(imagePath)
+	response.type('text/plain')
+	response.send((Math.floor(Math.random() * 6) + 1).toString())
 })
 
 // Custom 404 page.
